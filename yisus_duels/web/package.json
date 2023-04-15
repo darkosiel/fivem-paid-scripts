@@ -1,0 +1,34 @@
+{
+  "name": "fivem-react-boilerplate-esbuild",
+  "version": "1.0.0",
+  "scripts": {
+    "watch:fivem": "esbuild src/main.tsx --outdir=dist --watch --target=es6 --minify --bundle --loader:.png=dataurl --loader:.ttf=file --loader:.otf=file",
+    "dev": "vite",
+    "build": "esbuild src/main.tsx --outdir=dist --target=es6 --minify --bundle --loader:.png=dataurl --loader:.ttf=file --loader:.otf=file"
+  },
+  "author": "Oasis Development Team",
+  "license": "ISC",
+  "main": "src/main.tsx",
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mantine/carousel": "^6.0.0",
+    "@mantine/core": "^6.0.0",
+    "@mantine/form": "^6.0.0",
+    "@mantine/hooks": "^6.0.0",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "embla-carousel-react": "^7.0.9",
+    "esbuild": "^0.15.7",
+    "framer-motion": "^7.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^4.9.3",
+    "zustand": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "@vitejs/plugin-react": "^2.1.0",
+    "vite": "^3.1.2"
+  }
+}
