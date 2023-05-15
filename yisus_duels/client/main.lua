@@ -78,15 +78,16 @@ end
 local function getPlayerTeam()
     if not currentMatch then return end
     for i = 1, #currentMatch.team1, 1 do
-        if game.team1[i].id == cache.serverId then
+        if currentMatch.team1[i].id == cache.serverId then
             return 'team1'
         end
     end
     for i = 1, #currentMatch.team2, 1 do
-        if game.team2[i].id == cache.serverId then
+        if currentMatch.team2[i].id == cache.serverId then
             return 'team2'
         end
     end
+    return 'team1'
 end
 
 AddStateBagChangeHandler('DuelsGames', 'global', function(_, _, value)
@@ -321,3 +322,6 @@ end)
 exports('isPlaying', function()
     return LocalPlayer.state.inDuel ~= nil
 end)
+
+-- Reset this just in case of resource restart
+LocalPlayer.state.inDuel = nil

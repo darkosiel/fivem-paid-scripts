@@ -5,6 +5,8 @@ lua54 'yes'
 author 'Yisus#6342 - yisus.store/discord'
 ui_page 'web/dist/index.html'
 
+version '1.0.5'
+
 shared_scripts {
     '@ox_lib/init.lua',
     'locale.lua'
