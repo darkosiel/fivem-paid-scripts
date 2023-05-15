@@ -190,7 +190,6 @@ local function finishMatch(match, winner, saveStats)
             local deaths = player.deaths
             local wins = winner == 1 and 1 or 0
             local loses = winner == 1 and 0 or 1
-            print("1", identifier, player.name, kills, deaths, wins, loses)
             addPlayerStatToLb(identifier, player.name, kills, deaths, wins, loses)
         end
 
@@ -201,7 +200,6 @@ local function finishMatch(match, winner, saveStats)
             local deaths = player.deaths
             local wins = winner == 2 and 1 or 0
             local loses = winner == 2 and 0 or 1
-            print("2", identifier, player.name, kills, deaths, wins, loses)
             addPlayerStatToLb(identifier, player.name, kills, deaths, wins, loses)
         end
     end
@@ -502,14 +500,12 @@ end)
 
 RegisterNetEvent('duels:exitRequest', function()
     local playerId = source
-    local state = Player(playerId).state
-
-    local matchId = state.inDuel
+    local matchId = Player(playerId).state.inDuel
     if not matchId then return end
 
     local match = getMatchFromId(matchId)
     if not match then return end
-
+    
     handleNextMatchRound(match, true, 0, 'player_disconnect')
 end)
 

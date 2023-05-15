@@ -12,14 +12,14 @@ shared_scripts {
 
 client_scripts {
     'import.lua',
-    'client/bridge/**/*.lua',
+    'client/bridge/*.lua',
     'client/death.lua',
     'client/main.lua'
 }
 
 server_scripts {
     'server/data.lua',
-    'server/bridge/**/*.lua',
+    'server/bridge/*.lua',
     'server/leaderboard.lua',
     'server/main.lua'
 }
@@ -40,6 +40,8 @@ files {
 
 escrow_ignore {
     'client/data.lua',
+    'client/bridge/*.lua',
     'server/data.lua',
+    'server/bridge/*.lua',
     'locale.lua'
 }

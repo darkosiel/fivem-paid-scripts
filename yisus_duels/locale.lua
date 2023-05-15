@@ -1,3 +1,7 @@
+--- Set your locale here
+local lang = 'en'
+
+--- Edit or add your own locales here
 local strings = {
     ['en'] = {
         ['nui.duel.create'] = '+ Create',
@@ -103,21 +107,21 @@ local strings = {
     },
 }
 
-local lang = 'es'
-
+--- Check to know if used locale exists
 if not strings[lang] then
-    print(('[EDEN_DUELS] [WARN] Locale %s not found, using en instead'):format(lang))
+    print(('[YISUS_DUELS] [WARN] Locale %s not found, using en instead'):format(lang))
 end
 
-
+-- Dont touch this
 function L(name, ...)
     if not strings[lang][name] then
-        print(('[EDEN_DUELS] [ERROR] Missing translation %s for locale %s'):format(name, lang))
+        print(('[YISUS_DUELS] [ERROR] Missing translation %s for locale %s'):format(name, lang))
         return 'Missing translation'
     end
     return strings[lang][name]:format(...)
 end
 
+-- Dont touch this
 function GetLocales()
     return strings[lang]
 end

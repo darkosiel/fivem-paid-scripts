@@ -75,6 +75,20 @@ local function countdown()
     FreezeEntityPosition(PlayerPedId(), false)
 end
 
+local function getPlayerTeam()
+    if not currentMatch then return end
+    for i = 1, #currentMatch.team1, 1 do
+        if game.team1[i].id == cache.serverId then
+            return 'team1'
+        end
+    end
+    for i = 1, #currentMatch.team2, 1 do
+        if game.team2[i].id == cache.serverId then
+            return 'team2'
+        end
+    end
+end
+
 AddStateBagChangeHandler('DuelsGames', 'global', function(_, _, value)
     Lobbies = value
     if nuiActive then
@@ -145,9 +159,6 @@ RegisterNUICallback('startMatch', function(data, cb)
     end
     local startedMatch = lib.callback.await('duels:startMatch', false, lobbyId, map)
     cb(startedMatch)
-    if startMatch then
-        bridge.matchStarted()
-    end
 end)
 
 RegisterNUICallback('matchTimerFinished', function(_, cb)
@@ -199,6 +210,8 @@ RegisterNetEvent('duels:matchInit', function()
 
     if (not currentMatch) then return end
 
+    bridge.matchStarted(getPlayerTeam())
+
     SetEntityInvincible(PlayerPedId(), false)
     NetworkSetFriendlyFireOption(true)
     SetCanAttackFriendly(PlayerPedId(), true, true)
@@ -226,8 +239,8 @@ RegisterNetEvent('duels:matchInit', function()
 end)
 
 RegisterNetEvent('duels:nextMatchRound', function(match, finishedMatch, winner, reason)
-    currentMatch = finishedMatch and false or match
-    print(finishedMatch, winner, reason)
+    currentMatch = match
+    
     if not finishedMatch and winner and reason == 'next_round' then
         if winner ~= 0 then
             bridge.notify(L('game.nextround.win', winner), 'success')
@@ -260,6 +273,11 @@ RegisterNetEvent('duels:nextMatchRound', function(match, finishedMatch, winner, 
 
     Wait(100)
 
+    if finishedMatch then
+        bridge.finishedMatch(getPlayerTeam())
+        currentMatch = false
+    end
+
     local pedCoords = GetEntityCoords(PlayerPedId())
     local foundSafeZ, safeZ = GetGroundZAndNormalFor_3dCoord(pedCoords.x, pedCoords.y, pedCoords.z)
 
@@ -286,15 +304,17 @@ end)
 
 local canDoCommand = true
 RegisterCommand(config.exitDuelCommand, function(source, args, raw)
-    if not LocalPlayer.state.inDuel or not canDoCommnad then return end
-    canDoCommand = false
+    if not exports['yisus_duels']:isPlaying() then return print('You\'re not playing a duel so, can execute this command') end
+    if not canDoCommand then return print('You\'re on cooldown to use /' + config.exitDuelCommand) end
     TriggerServerEvent('duels:exitRequest')
+    canDoCommand = false
     SetTimeout(5000, function()
         canDoCommand = true
     end)
 end, false)
 
 exports('toggleUI', function(toggle)
+    if exports['yisus_duels']:isPlaying() then return print('You can\'t open duels lobby when in a match') end
     toggleUI(toggle)
 end)
 

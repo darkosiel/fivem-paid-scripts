@@ -12,8 +12,15 @@ function bridge.toggledUI(toggled)
 end
 
 ---Called when the match starts
-function bridge.matchStarted()
-    return
+---@param team string team1|team2
+function bridge.matchStarted(team)
+    -- any logic u want (remove clothing or whatever)
+end
+
+---Called when the match ends
+---@param team string team1|team2
+function bridge.finishedMatch(team)
+    -- any logic u want (remove clothing or whatever)
 end
 
 ---Used to send a notification
@@ -31,6 +38,7 @@ function bridge.hideLoadingPrompt()
     TriggerEvent('eden:hideLoadingPrompt')
 end
 
-RegisterCommand('duels', function(source, args, raw)
-    exports['eden_duels']:toggleUI(true)
+--- By default the script does not have any option to open the ui, so i added a command as example.
+RegisterCommand('duels', function()
+    exports['yisus_duels']:toggleUI(true)
 end, false)

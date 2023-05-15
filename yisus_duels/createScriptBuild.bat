@@ -1,9 +1,9 @@
 @echo off
 set source_folder=E:\Repositories\Personal\fivem-paid-scripts\yisus_duels
-set build_folder=E:\Repositories\Personal\fivem-paid-scripts\yisus_duels\builds\open
+set build_folder=E:\Repositories\Personal\fivem-paid-scripts\yisus_duels\build
 
 echo Deleting current open build...
-rm %source_folder%\builds
+rm "%source_folder%\builds"
 
 echo Copying open files...
 xcopy "%source_folder%\client" "%build_folder%\client" /E /I /H /Y

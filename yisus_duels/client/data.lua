@@ -4,7 +4,7 @@ return {
     exitDuelCommand = 'exitduel', -- command to exit a duels when you are in a duel
     weapons = {      -- available weapons to play in duels
         { value = 'WEAPON_APPISTOL',     label = 'AP Pistol' },
-        { value = 'WEAPON_COMBATPISTOL', label = 'Pistola de Combate' }
+        { value = 'WEAPON_COMBATPISTOL', label = 'Combat Pistol' }
     },
     maps = {
         {

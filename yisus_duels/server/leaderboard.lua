@@ -31,8 +31,6 @@ function addPlayerStatToLb(identifier, name, kills, deaths, wins, loses)
 
     lb[identifier] = player
 
-    print('adding player to leaderboard: ', identifier, json.encode(player))
-
     saveLeaderboard()
 end
 
@@ -48,7 +46,7 @@ end)
 
 if config.clearStatsOnRestart then
     SetResourceKvp('leaderboard', json.encode({}))
-    print('[EDEN_DUELS] [INFO] Cleared leaderboard')
+    print('[YISUS_DUELS] [INFO] Cleared leaderboard')
 end
 
 loadLeaderboard()
