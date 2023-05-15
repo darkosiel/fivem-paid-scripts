@@ -28,6 +28,10 @@ const App: React.FC = () => {
     useEffect(() => {
         const handleKeyDown = async (event) => {
             if (event.key === "Escape") {
+                if (currentLobby !== null) {
+                    const leaved = await fetchNui('leaveLobby', { lobbyId: currentLobby.id });
+                    if (leaved) useGlobalStore.setState({ currentLobby: null });
+                }
                 await fetchNui('exit', {}, true)
             }
         };
@@ -35,7 +39,7 @@ const App: React.FC = () => {
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
         };
-    }, []);
+    }, [currentLobby]);
 
     fetchNui('loaded', {}, { gameConfig: mockData.gameConfig, playerId: 1, messages: mockData.messages }).then((data) => {
         setGameConfig(data.gameConfig);

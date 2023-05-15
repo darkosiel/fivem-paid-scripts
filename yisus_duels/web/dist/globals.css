@@ -1,8 +1,8 @@
 :root {
     --primary-color: #0f1013f6;
-    --alt-color: #7f1e9c;
-    --alt-opacity-color: #7f1e9c36;
-    --alt-highlight-color: #9303be;
+    --alt-color: #005481;
+    --alt-opacity-color: rgba(1, 146, 223, 0.212);
+    --alt-highlight-color: #019DEF;
 
     --ingame-counter: rgba(15, 16, 19, 0.8);
     --team1-ingame-color: rgba(28, 78, 217, 0.8);
